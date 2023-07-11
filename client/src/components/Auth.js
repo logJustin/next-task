@@ -9,6 +9,7 @@ export default function Auth() {
     const [confirmPassword, setConfirmPassword] = useState(null)
     const [error, setError] = useState(null)
 
+
     const viewLogin = (status) => {
         setError(null)
         setIsLogIn(status)
@@ -24,14 +25,14 @@ export default function Auth() {
             setError('Email and password cannot be empty.')
             return
         }
-        console.log(`${process.env.REACT_APP_SERVERURL}/${endpoint}`)
+
         const response = await fetch(`${process.env.REACT_APP_SERVERURL}/${endpoint}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
         })
         const data = await response.json()
-        console.log(data)
+
         if (data.detail) {
             setError(data.detail)
         } else {
